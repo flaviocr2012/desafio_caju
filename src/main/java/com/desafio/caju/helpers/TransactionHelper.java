@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
+import static com.desafio.caju.constants.TransactionConstants.*;
+
 @Component
 public class TransactionHelper {
 
@@ -22,7 +24,7 @@ public class TransactionHelper {
 
     public static Account getAccount(String accountId, AccountRepository accountRepository) throws TransactionException {
         return accountRepository.findByAccountId(accountId)
-                .orElseThrow(() -> new TransactionException(TransactionConstants.GENERAL_ERROR_CODE, TransactionConstants.ACCOUNT_NOT_FOUND));
+                .orElseThrow(() -> new TransactionException(GENERAL_ERROR_CODE, ACCOUNT_NOT_FOUND));
     }
 
     public static void processTransaction(Account account, BalanceType balanceType, BigDecimal amount) throws TransactionException {
@@ -56,7 +58,7 @@ public class TransactionHelper {
             case FOOD -> account.setFoodBalance(account.getFoodBalance().subtract(amount));
             case MEAL -> account.setMealBalance(account.getMealBalance().subtract(amount));
             case CASH -> account.setCashBalance(account.getCashBalance().subtract(amount));
-            default -> throw new IllegalArgumentException("Unknown balance type");
+            default -> throw new TransactionException(GENERAL_ERROR_CODE, UNKNOWN_BALANCE_TYPE);
         }
     }
 }

@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.desafio.caju.helpers.TransactionHelper.*;
+import static com.desafio.caju.helpers.TransactionHelper.processTransaction;
+import static com.desafio.caju.helpers.TransactionHelper.mapMCC;
+import static com.desafio.caju.helpers.TransactionHelper.mapMCCToBalanceType;
+import static com.desafio.caju.helpers.TransactionHelper.getAccount;
 
 @Service
 public class TransactionService {
@@ -29,7 +32,9 @@ public class TransactionService {
     public String authorizeTransaction(TransactionDTO transactionDTO) throws TransactionException {
         try {
             var mcc = mapMCC(transactionDTO, merchantMCCMapping);
+
             var balanceType = mapMCCToBalanceType(mcc);
+
             var account = getAccount(transactionDTO.getAccountId(), accountRepository);
 
             processTransaction(account, balanceType, transactionDTO.getTotalAmount());
@@ -48,7 +53,6 @@ public class TransactionService {
             throw new GeneralTransactionException();
         }
     }
-
 }
 
 

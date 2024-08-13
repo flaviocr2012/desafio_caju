@@ -2,7 +2,6 @@ package com.desafio.caju.controllers;
 
 import com.desafio.caju.dtos.TransactionDTO;
 import com.desafio.caju.services.TransactionService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +26,6 @@ public class TransactionControllerTest {
     @MockBean
     private TransactionService transactionService;
 
-    @BeforeEach
-    public void setUp() {
-        // Configuração inicial, se necessário
-    }
-
     @Test
     public void testAuthorizeTransaction_ShouldReturnStatusOkAndCode00() throws Exception {
         // Arrange
@@ -45,7 +39,6 @@ public class TransactionControllerTest {
                 + "\"merchant\": \"PADARIA DO ZE SAO PAULO BR\""
                 + "}";
 
-        // Act & Assert
         mockMvc.perform(post("/api/v1/transactions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(transactionJson))
@@ -56,7 +49,7 @@ public class TransactionControllerTest {
 
     @Test
     public void testAuthorizeTransaction_ShouldReturnStatusOkAndCode51() throws Exception {
-        // Arrange
+
         Mockito.when(transactionService.authorizeTransaction(any(TransactionDTO.class)))
                 .thenReturn("51");
 
@@ -67,7 +60,6 @@ public class TransactionControllerTest {
                 + "\"merchant\": \"PADARIA DO ZE               SAO PAULO BR\""
                 + "}";
 
-        // Act & Assert
         mockMvc.perform(post("/api/v1/transactions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(transactionJson))

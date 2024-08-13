@@ -19,7 +19,6 @@ public class MerchantMCCMapping {
         merchantMCCMap.put("PICPAY*BILHETEUNICO GOIANIA BR", "6012");
     }
 
-
     public Optional<String> getMCCByMerchant(String merchant) {
         return Optional.ofNullable(merchantMCCMap.get(merchant));
     }

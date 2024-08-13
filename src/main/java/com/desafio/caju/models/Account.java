@@ -13,13 +13,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Account {
-
     @Id
     private String accountId;
-
     private BigDecimal foodBalance;
     private BigDecimal mealBalance;
     private BigDecimal cashBalance;
-
 }
 
