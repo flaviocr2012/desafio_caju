@@ -2,10 +2,6 @@ package com.desafio.caju.constants;
 
 public final class TransactionConstants {
 
-    private TransactionConstants() {
-
-    }
-
     public static final String SUCCESS_CODE = "00";
     public static final String INSUFFICIENT_FUNDS_CODE = "51";
     public static final String GENERAL_ERROR_CODE = "07";
