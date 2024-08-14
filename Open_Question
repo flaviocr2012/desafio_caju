@@ -1,0 +1,30 @@
+L4. Questao Aberta
+
+- Transações simultâneas: dado que o mesmo cartão de crédito pode ser utilizado em diferentes serviços online,
+existe uma pequena mas existente probabilidade de ocorrerem duas transações ao mesmo tempo.
+O que você faria para garantir que apenas uma transação por conta fosse processada em um determinado momento?
+Esteja ciente do fato de que todas as solicitações de transação são síncronas e devem ser processadas rapidamente (menos de 100 ms), ou a transação atingirá o timeout.
+
+R: Para lidar com transações simultâneas em um sistema de autorização de crédito,
+é essencial garantir que apenas uma transação por conta seja processada em um dado momento,
+evitando problemas de inconsistência como débito duplo ou transações inválidas devido a saldo insuficiente.
+
+Bloqueio Otimista (Optimistic Locking)
+
+O bloqueio otimista assume que as colisões de transações são raras e, portanto,
+não bloqueia os dados quando uma transação está sendo processada. No entanto,
+antes de persistir as alterações, o sistema verifica se os dados não foram modificados desde que foram lidos.
+
+Como funciona:
+
+Adiciona uma coluna de versão no registro da conta.
+Ao iniciar uma transação, a versão atual é lida e armazenada.
+Antes de concluir a transação, a versão é verificada.
+Se a versão no banco de dados não corresponder à versão armazenada, a transação falha, e o processo pode ser reiniciado.
+
+Vantagens:
+
+* Evita deadlocks e é eficiente em cenários onde as colisões de transações são raras.
+* Não bloqueia recursos por longos períodos, o que é crucial para manter a latência baixa.
+* Como não bloqueia recursos por longos períodos, a abordagem é adequada para sistemas que exigem alta performance
+e baixa latência, como sistemas de autorização de transações.
