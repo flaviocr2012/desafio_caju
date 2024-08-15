@@ -53,6 +53,6 @@ VALUES ('123', 200.00, 50.00, 300.00);
 
 **Testing no fund to complete transaction**
 
-![testing no fund](https://github.com/flaviocr2012/desafio_caju/blob/master/Screenshot%20from%202024-08-13%2021-53-34.png?raw=true)
+![testing no fund](https://github.com/flaviocr2012/desafio_caju/blob/master/no_fund_test.png?raw=true)
 
    
